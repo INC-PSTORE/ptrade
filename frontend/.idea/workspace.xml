@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="78270ff9-655f-4818-beba-d749671520a9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/app/containers/App/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/containers/App/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/port.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/port.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1fu1WjdvVkmRDALG6c7DkoytfkD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.stylelint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.stylelint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.stylelint" value="$PROJECT_DIR$/node_modules/stylelint" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/components" />
+      <recent name="$PROJECT_DIR$/app/containers/SignPage" />
+      <recent name="$PROJECT_DIR$/app/containers" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="78270ff9-655f-4818-beba-d749671520a9" name="Default Changelist" comment="" />
+      <created>1597053196779</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1597053196779</updated>
+      <workItem from="1597053198026" duration="3277000" />
+      <workItem from="1597114422399" duration="66900000" />
+      <workItem from="1597370275686" duration="154245000" />
+      <workItem from="1598115470826" duration="78761000" />
+      <workItem from="1598521657892" duration="3232000" />
+      <workItem from="1598938083923" duration="13209000" />
+      <workItem from="1599102360792" duration="1605000" />
+      <workItem from="1599284488497" duration="79510000" />
+      <workItem from="1599893815271" duration="2881000" />
+      <workItem from="1600348923852" duration="2199000" />
+    </task>
+    <task id="LOCAL-00001" summary="frontend: remove accounts component and added wallets.">
+      <created>1597371741470</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1597371741470</updated>
+    </task>
+    <task id="LOCAL-00002" summary="frontend: fund successfully. a lot of work todo.">
+      <created>1597492983543</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1597492983544</updated>
+    </task>
+    <task id="LOCAL-00003" summary="frontend: withdraw successfully. Working sig and history page.">
+      <created>1597582337185</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1597582337185</updated>
+    </task>
+    <task id="LOCAL-00004" summary="frontend: added sign page.">
+      <created>1597592901031</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1597592901031</updated>
+    </task>
+    <task id="LOCAL-00005" summary="frontend: added history page. not tested yet.">
+      <created>1597636769313</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1597636769313</updated>
+    </task>
+    <task id="LOCAL-00006" summary="frontend: added successfull snackbar and load fund withdraw event to history page.">
+      <created>1597644795283</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1597644795283</updated>
+    </task>
+    <task id="LOCAL-00007" summary="frontend: added validation to signature.">
+      <created>1597651769949</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1597651769949</updated>
+    </task>
+    <task id="LOCAL-00008" summary="frontend: preload past events then listen to websocket.">
+      <created>1597661880242</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1597661880242</updated>
+    </task>
+    <task id="LOCAL-00009" summary="frontend: full functionality and tested.">
+      <created>1597667726815</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1597667726815</updated>
+    </task>
+    <task id="LOCAL-00010" summary="frontend: added expandable detail for wallet. Working on detail and filter on wallet page.">
+      <created>1597731465678</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1597731465678</updated>
+    </task>
+    <task id="LOCAL-00011" summary="frontend: expandable working like a charm. Need to replace eth Acc by Generated Eth Acc.">
+      <created>1597738276810</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1597738276811</updated>
+    </task>
+    <task id="LOCAL-00012" summary="frontend: create, fund and withdraw wallet signed by generated eth acc.">
+      <created>1597742930485</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1597742930485</updated>
+    </task>
+    <task id="LOCAL-00013" summary="frontend: socket auto reconnect and stop loading wasm.">
+      <created>1597836442911</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1597836442912</updated>
+    </task>
+    <task id="LOCAL-00014" summary="frontend: fix bug =&gt; multiple amount with decimal.">
+      <created>1597915014601</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1597915014601</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Update adapter contract and adapter address">
+      <created>1597918560991</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1597918560991</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated adapter to return exact eth amount.">
+      <created>1597920560458</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1597920560458</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Adapter return to vault tempid instead eth.">
+      <created>1597921372241</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1597921372241</updated>
+    </task>
+    <task id="LOCAL-00018" summary="For ether deposit case return WETH instead.">
+      <created>1597922091694</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1597922091694</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Reserve to list latest action on head.">
+      <created>1597922608500</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1597922608500</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Revert cause unexpected result.">
+      <created>1597922836197</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1597922836197</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Updated compare to show button in withdraw modal and backend accept one owner.">
+      <created>1598216442502</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1598216442502</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Fix big bug =&gt; added tokenId to withdraw request.">
+      <created>1598239126322</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1598239126322</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Update configure to run on staging.">
+      <created>1598240405976</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1598240405976</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Validate owners address avoid duplicate case and update form amount.">
+      <created>1598254441302</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1598254441302</updated>
+    </task>
+    <task id="LOCAL-00025" summary="assign withdraw id to form.">
+      <created>1598254936284</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1598254936284</updated>
+    </task>
+    <task id="LOCAL-00026" summary="lowercase address to compare and remove owner if self-request.">
+      <created>1598256198948</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1598256198948</updated>
+    </task>
+    <task id="LOCAL-00027" summary="assign gen eth acc to update withdraw request status.">
+      <created>1598265002822</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1598265002823</updated>
+    </task>
+    <task id="LOCAL-00028" summary="reload balances after fund and withdraw.">
+      <created>1598269215733</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1598269215734</updated>
+    </task>
+    <task id="LOCAL-00029" summary="updated UX for withdraw request.">
+      <created>1598289991351</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1598289991351</updated>
+    </task>
+    <task id="LOCAL-00030" summary="resolve conflict, merge and updated new contract address.">
+      <created>1598291035015</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1598291035015</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix bug withdraw request =&gt; wrong amount in verifier signature.">
+      <created>1598322105571</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1598322105572</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Update incognito contract address.">
+      <created>1598521719236</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1598521719236</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Removed redundant and added metamask support.">
+      <created>1598954561905</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1598954561908</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Added interval time to get pool size and style token icon.">
+      <created>1599326620804</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1599326620806</updated>
+    </task>
+    <task id="LOCAL-00035" summary="upgraded material ui to version 4 and style for mobile.">
+      <created>1599388239913</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1599388239913</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Traded successfully however the formula diff a bit from origin.">
+      <created>1599405285957</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1599405285957</updated>
+    </task>
+    <task id="LOCAL-00037" summary="calculated exact output amount.">
+      <created>1599410244877</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1599410244877</updated>
+    </task>
+    <task id="LOCAL-00038" summary="added loading balances and unicorn image">
+      <created>1599496361635</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1599496361635</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Added unicorn logo to ptrade">
+      <created>1599497173485</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1599497173485</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Configured to run deploy on gcloud instance.">
+      <created>1599557302959</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1599557302959</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Remove header error and listen event on account change.">
+      <created>1599619433130</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1599619433130</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Removed psafe text and replace it by ptrade.">
+      <created>1599621037814</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1599621037814</updated>
+    </task>
+    <task id="LOCAL-00043" summary="fixed overflow value when input trade amount">
+      <created>1600352806565</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1600352806565</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Reserve to list latest action on head." />
+    <MESSAGE value="Revert cause unexpected result." />
+    <MESSAGE value="Updated compare to show button in withdraw modal and backend accept one owner." />
+    <MESSAGE value="Fix big bug =&gt; added tokenId to withdraw request." />
+    <MESSAGE value="Update configure to run on staging." />
+    <MESSAGE value="Validate owners address avoid duplicate case and update form amount." />
+    <MESSAGE value="assign withdraw id to form." />
+    <MESSAGE value="lowercase address to compare and remove owner if self-request." />
+    <MESSAGE value="assign gen eth acc to update withdraw request status." />
+    <MESSAGE value="reload balances after fund and withdraw." />
+    <MESSAGE value="updated UX for withdraw request." />
+    <MESSAGE value="resolve conflict, merge and updated new contract address." />
+    <MESSAGE value="fix bug withdraw request =&gt; wrong amount in verifier signature." />
+    <MESSAGE value="Update incognito contract address." />
+    <MESSAGE value="Removed redundant and added metamask support." />
+    <MESSAGE value="Added interval time to get pool size and style token icon." />
+    <MESSAGE value="upgraded material ui to version 4 and style for mobile." />
+    <MESSAGE value="Traded successfully however the formula diff a bit from origin." />
+    <MESSAGE value="calculated exact output amount." />
+    <MESSAGE value="added loading balances and unicorn image" />
+    <MESSAGE value="Added unicorn logo to ptrade" />
+    <MESSAGE value="Configured to run deploy on gcloud instance." />
+    <MESSAGE value="Remove header error and listen event on account change." />
+    <MESSAGE value="Removed psafe text and replace it by ptrade." />
+    <MESSAGE value="fixed overflow value when input trade amount" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed overflow value when input trade amount" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="424" y="262" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598257024886">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="424" y="262" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1598257024886" />
+    <state width="1899" height="344" key="GridCell.Tab.0.bottom" timestamp="1599621189345">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1899" height="344" key="GridCell.Tab.0.bottom/0.0.1920.1200@0.0.1920.1200" timestamp="1599621189345" />
+    <state width="1899" height="344" key="GridCell.Tab.0.center" timestamp="1599621189343">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1899" height="344" key="GridCell.Tab.0.center/0.0.1920.1200@0.0.1920.1200" timestamp="1599621189343" />
+    <state width="1899" height="344" key="GridCell.Tab.0.left" timestamp="1599621189342">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1899" height="344" key="GridCell.Tab.0.left/0.0.1920.1200@0.0.1920.1200" timestamp="1599621189342" />
+    <state width="1899" height="344" key="GridCell.Tab.0.right" timestamp="1599621189344">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1899" height="344" key="GridCell.Tab.0.right/0.0.1920.1200@0.0.1920.1200" timestamp="1599621189344" />
+    <state x="192" y="109" key="MergeDialog" timestamp="1598290724433">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="192" y="109" key="MergeDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1598290724432" />
+    <state x="600" y="368" key="MultipleFileMergeDialog" timestamp="1598290724490">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="600" y="368" key="MultipleFileMergeDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1598290724490" />
+    <state x="678" y="309" key="RollbackChangesDialog" timestamp="1599382024950">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="678" y="309" key="RollbackChangesDialog/0.0.1920.1200@0.0.1920.1200" timestamp="1599382024950" />
+    <state x="678" y="326" key="RollbackChangesDialog/0.23.1920.1177@0.23.1920.1177" timestamp="1599320350024" />
+    <state x="469" y="231" key="SettingsEditor" timestamp="1599293428697">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="469" y="231" key="SettingsEditor/0.0.1920.1200@0.0.1920.1200" timestamp="1599293428697" />
+    <state x="469" y="250" key="SettingsEditor/0.23.1920.1177@0.23.1920.1177" timestamp="1597334751313" />
+    <state x="565" y="217" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1599298682580">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="565" y="217" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1200@0.0.1920.1200" timestamp="1599298682580" />
+    <state x="761" y="532" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597333967969">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state x="761" y="532" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1920.1177@0.23.1920.1177" timestamp="1597333967969" />
+    <state x="661" y="350" width="601" height="559" key="find.popup" timestamp="1599620950748">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="661" y="350" width="601" height="559" key="find.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1599620950748" />
+    <state x="661" y="366" width="598" height="548" key="find.popup/0.23.1920.1177@0.23.1920.1177" timestamp="1597224918733" />
+    <state x="625" y="268" key="run.anything.popup" timestamp="1599493792033">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="625" y="268" key="run.anything.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1599493792033" />
+    <state x="625" y="286" key="run.anything.popup/0.23.1920.1177@0.23.1920.1177" timestamp="1597371713287" />
+    <state x="625" y="270" width="670" height="690" key="search.everywhere.popup" timestamp="1599374822820">
+      <screen x="0" y="0" width="1920" height="1200" />
+    </state>
+    <state x="625" y="270" width="670" height="690" key="search.everywhere.popup/0.0.1920.1200@0.0.1920.1200" timestamp="1599374822820" />
+    <state x="625" y="288" width="670" height="676" key="search.everywhere.popup/0.23.1920.1177@0.23.1920.1177" timestamp="1597389417375" />
+  </component>
+</project>
