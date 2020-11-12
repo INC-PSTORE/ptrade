@@ -63,7 +63,7 @@ export const initialState = {
     isMetaMaskEnabled: false,
     metaMaskRequiredMess: null,
     metaMaskAccounts: null,
-    chainId: 1,
+    chainId: "0x1",
   },
   isRefreshingBalances: false,
 };

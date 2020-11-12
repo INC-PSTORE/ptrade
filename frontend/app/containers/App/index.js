@@ -58,6 +58,7 @@ import {
 } from './actions';
 
 import { ETH_PRIVATE_KEY_FIELD_NAME, INC_WALLET_FIELD_NAME, PSTORE_DOMAIN } from './constants';
+import {KOVAN_CHAIN_ID, MAINNET_CHAIN_ID} from "../../common/constants";
 
 /* eslint-disable react/prefer-stateless-function */
 export class App extends React.PureComponent {
@@ -132,19 +133,14 @@ export class App extends React.PureComponent {
       deployedTokens,
       generatedETHAccFromIncAcc,
       metaMask,
-      onEnableMetaMask,
       isRefreshingBalances,
     } = this.props;
 
     return (
       <div>
-        { metaMask && metaMask.isMetaMaskEnabled && metaMask.chainId !== "0x2a" && metaMask.metaMaskRequiredMess &&
+        {metaMask && metaMask.isMetaMaskEnabled && metaMask.chainId !== KOVAN_CHAIN_ID && metaMask.chainId !== MAINNET_CHAIN_ID && metaMask.metaMaskRequiredMess &&
         <div className={classes.metaMaskMess}>
           <Typography style={{color: 'white', marginLeft: '10px'}}>{metaMask.metaMaskRequiredMess}</Typography>
-          {/*{ !metaMask.isMetaMaskEnabled &&*/}
-          {/*<Button variant="contained" color="secondary" onClick={onEnableMetaMask}*/}
-          {/*        style={{color: 'white', marginLeft: '4px'}}>Connect Now</Button>*/}
-          {/*}*/}
         </div>
         }
         <AppBar position="static" className={classes.appBar}>

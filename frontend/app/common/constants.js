@@ -3,11 +3,20 @@ export const PRIMARY_COLOR = '#2777ff';
 export const INITIAL_PAGING_SKIP = 0;
 export const PAGING_LIMIT = 15;
 
+export const INCOGNITO_MAINNET_FULLNODE = "https://fullnode.incognito.best";
+export const INCOGNITO_TESTNET_FULLNODE = "https://testnet1.incognito.org/fullnode";
+
+export const ETH_INFURA_TESTNET_NODE = "https://kovan.infura.io/v3/34918000975d4374a056ed78fe21c517";
+export const ETH_INFURA_MAINNET_NODE = "https://mainnet.infura.io/v3/34918000975d4374a056ed78fe21c517";
+
 export const INCOGNITO_TESTNET_CONTRACT_ADDRESS = '0xE0D5e7217c6C4bc475404b26d763fAD3F14D2b86';
-export const INCOGNITO_MAINNET_CONTRACT_ADDRESS = '0xE0D5e7217c6C4bc475404b26d763fAD3F14D2b86';
+export const INCOGNITO_MAINNET_CONTRACT_ADDRESS = '0x97875355eF55Ae35613029df8B1C8Cf8f89c9066';
 
 export const PUNISWAP_TESTNET_CONTRACT_ADDRESS = '0x7783C8c5AEC5cBFEF7311b4F4F33302DA6624d69';
-export const PUNISWAP_MAINNET_CONTRACT_ADDRESS = '0x7783C8c5AEC5cBFEF7311b4F4F33302DA6624d69';
+export const PUNISWAP_MAINNET_CONTRACT_ADDRESS = '0x3aa87e342d92fa9a0aca21538148b841fa1fb3a2';
+
+export const KOVAN_CHAIN_ID = "0x2a";
+export const MAINNET_CHAIN_ID = "0x1";
 
 export const UNISWAP_TRADE_ABI = [
   {
@@ -148,7 +157,7 @@ export const UNISWAP_TRADE_ABI = [
 ];
 
 export const UNISWAP_FACTORY_TESTNET = '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f';
-export const UNISWAP_FACTORY_MAINNET = '0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f';
+export const UNISWAP_FACTORY_MAINNET = '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f';
 
 export const UNISWAP_FACTORY_ABI = [{
   "constant": true,
@@ -187,7 +196,8 @@ export const UNISWAP_PAIR_ABI = [{
 }];
 
 export const ETHER_ID = '0x0000000000000000000000000000000000000000';
-export const WETH = '0xd0a1e359811322d97991e03f863a0c30c2cf029c';
+export const WETH_TESTNET = '0xd0a1e359811322d97991e03f863a0c30c2cf029c';
+export const WETH_MAINNET = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';
 
 export const STORAGE_KEY = {
   INC_WALLET: 'INC_WALLET',

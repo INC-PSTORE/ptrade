@@ -2,7 +2,7 @@ import Wallet from 'ethereumjs-wallet';
 import { storage } from '../localStorage';
 import { STORAGE_KEY, ETHER_ID } from '../../common/constants';
 import Web3 from "web3";
-import { getETHFullnodeHost, getEtherScanAPIHost } from "../../common/utils";
+import { getETHFullnodeHost} from "../../common/utils";
 import {countDownRequests} from "../../containers/App/actions";
 import {HANDLE_FAILURE_GLOBALLY} from "../../containers/App/constants";
 
@@ -69,27 +69,6 @@ export function loadETHAccountFromStorage(){
 
 export function saveETHPrivateKey(ethPrivateKey) {
     storage.setItem(STORAGE_KEY.ETH_PRIVATE_KEY, ethPrivateKey);
-}
-
-export async function getBalance(ethAddress, tokenId) {
-    if (tokenId === ETHER_ID) {
-        let weiBalance = await web3.eth.getBalance(ethAddress);
-        return web3.utils.fromWei(weiBalance, 'ether');
-    } else {
-        const getBalance = [
-            {"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},
-            {"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},
-        ];
-        const tokenInstance = new web3.eth.Contract(getBalance, tokenId);
-        let balance = await tokenInstance.methods.balanceOf(ethAddress).call();
-        let decimal =  await tokenInstance.methods.decimals().call();
-        return balance / (10 ** decimal);
-        // TODO: uncomment for product env
-        // const ethscanHost = getEtherScanAPIHost();
-        // const res = await fetch(ethscanHost+'?module=account&action=tokenbalance&contractaddress='+tokenId+'&address='+address+'&tag=latest&apikey=GGNTHK5V14XPUD87G2NGRU9RT6RP5INWWR');
-        // const data = await res.json();
-        // return data.result;
-    }
 }
 
 export function isETHAddressService(address) {
