@@ -9,13 +9,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-
-RUN npm install https://github.com/blackwine93v/sdk-v2.git
-# If you are building your code for production
-# RUN npm ci --only=production
+RUN npm run build
 
 # Bundle app source
 COPY . .
 
 EXPOSE 443
-CMD [ "npm", "start" ]
+CMD [ "node", "server" ]

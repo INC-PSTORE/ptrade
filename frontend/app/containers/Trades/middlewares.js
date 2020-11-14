@@ -24,7 +24,7 @@ import {
   getDefaultSupportedTokens,
   getUniswapFactoryContractAddress,
   getIncognitoContractAddr,
-  getIncContractABI,
+  getIncContractABI, getWETH,
 } from '../../common/utils';
 
 import {
@@ -34,13 +34,16 @@ import {
 import {countDownRequests, countUpRequests} from "../App/actions";
 import en from "react-intl/src/en";
 import {getUniswapTradeContractAddress} from "../../common/utils";
-import {ETHER_ID, UNISWAP_FACTORY_ABI, UNISWAP_PAIR_ABI, UNISWAP_TRADE_ABI, WETH} from "../../common/constants";
+import {
+  ETHER_ID,
+  MAINNET_CHAIN_ID,
+  UNISWAP_FACTORY_ABI,
+  UNISWAP_PAIR_ABI,
+  UNISWAP_TRADE_ABI,
+} from "../../common/constants";
 import {enableMetaMask} from "../App/middlewares";
 
 const eutil = require('ethereumjs-util');
-const web3 = new Web3(getETHFullnodeHost());
-const uniswapInstance = new web3.eth.Contract(UNISWAP_TRADE_ABI, getUniswapTradeContractAddress());
-const uniswapFactoryInstance = new web3.eth.Contract(UNISWAP_FACTORY_ABI, getUniswapFactoryContractAddress());
 
 export function loadTokens() {
   return async (dispatch, getState) => {
@@ -54,8 +57,9 @@ export function loadTokens() {
       //   getTokens(),
       //   options,
       // );
+      const isMainnet = getState().app.metaMask.chainId === MAINNET_CHAIN_ID;
       let tokensRes = {tokens: null};
-      let tokenSupported = getDefaultSupportedTokens();
+      let tokenSupported = getDefaultSupportedTokens(isMainnet);
       tokenSupported.shift();
       tokensRes.tokens = tokenSupported;
 
@@ -83,12 +87,13 @@ export function getExchangeRate(tradeForm) {
       if (tradeForm.reserve1 === 0 || tradeForm.reserve2 === 0) {
         return {};
       }
+      const web3 = new Web3();
       const reserve1BN = web3.utils.toBN(tradeForm.reserve1);
       const reserve2BN = web3.utils.toBN(tradeForm.reserve2);
       const invariant = reserve1BN.mul(reserve2BN);
-      const decimalPart =  web3.utils.toBN(Math.floor(tradeForm.inputAmount)).mul(web3.utils.toBN(10 ** (tradeForm.token1.eDecimals)))
-      const partition = (tradeForm.inputAmount - Math.floor(tradeForm.inputAmount)) * 10 ** (tradeForm.token1.eDecimals)
-      const tradeAmountBN = decimalPart.add(web3.utils.toBN(partition))
+      const decimalPart =  web3.utils.toBN(Math.floor(tradeForm.inputAmount)).mul(web3.utils.toBN(10 ** (tradeForm.token1.eDecimals)));
+      const partition = (tradeForm.inputAmount - Math.floor(tradeForm.inputAmount)) * 10 ** (tradeForm.token1.eDecimals);
+      const tradeAmountBN = decimalPart.add(web3.utils.toBN(Math.floor(partition)));
       let newToken1 = reserve1BN.add(tradeAmountBN.mul(web3.utils.toBN(997)).div(web3.utils.toBN(1000)));
       let newToken2 = invariant.div(newToken1);
       const receiveAmount = reserve2BN.sub(newToken2).sub(web3.utils.toBN(1));
@@ -112,14 +117,18 @@ export function getReservedPool() {
       return {};
     }
     try {
+      const isMainnet = getState().app.metaMask.chainId === MAINNET_CHAIN_ID;
+      const web3 = new Web3(getETHFullnodeHost(isMainnet));
+      const uniswapFactoryInstance = new web3.eth.Contract(UNISWAP_FACTORY_ABI, getUniswapFactoryContractAddress(isMainnet));
       let token1, token2;
       token1 = tradeForm.token1.extTokenId;
       token2 = tradeForm.token2.extTokenId;
+      const weth = getWETH(isMainnet);
       if (token1.toLowerCase() === ETHER_ID) {
-        token1 = WETH;
+        token1 = weth;
       }
       if (token2.toLowerCase() === ETHER_ID) {
-        token2 = WETH;
+        token2 = weth;
       }
       const pairAddress = await uniswapFactoryInstance.methods.getPair(token1, token2).call();
       if (pairAddress === ETHER_ID) {
@@ -127,6 +136,9 @@ export function getReservedPool() {
       }
       const pairInstance = new web3.eth.Contract(UNISWAP_PAIR_ABI, pairAddress);
       const reservePool = await pairInstance.methods.getReserves().call();
+      if (reservePool._reserve0 === "0" && reservePool._reserve1 === "0") {
+        throw 'Pair has no liquidity';
+      }
       const token0 = await pairInstance.methods.token0().call();
       if (token0.toLowerCase() === token1.toLowerCase()) {
         tradeForm.reserve1 = reservePool._reserve0;
@@ -135,9 +147,10 @@ export function getReservedPool() {
         tradeForm.reserve2 = reservePool._reserve0;
         tradeForm.reserve1 = reservePool._reserve1;
       }
-      dispatch(onChangeTradeForm(tradeForm));
       if (tradeForm.inputAmount) {
         dispatch(getExchangeRate(tradeForm));
+      } else {
+        dispatch(onChangeTradeForm(tradeForm));
       }
     } catch (e) {
       console.log(e);
@@ -149,18 +162,22 @@ export function getReservedPool() {
         tradeForm.outputAmount = 0;
         dispatch(onChangeTradeForm(tradeForm));
         errorText = 'Pair had not added yet';
+      } else if (e === 'Pair has no liquidity') {
+        errorText = 'Pair has no liquidity';
       }
       dispatch(updateValidateForm({snackBar: {isError: true, message: errorText}}));
     }
   }
 }
 
-const incognitoInstance = new web3.eth.Contract(getIncContractABI(), getIncognitoContractAddr());
-
 export function trade(tradeForm) {
   return async (dispatch, getState) => {
     dispatch(countUpRequests());
     try {
+      const isMainnet = getState().app.metaMask.chainId === MAINNET_CHAIN_ID;
+      const web3 = new Web3(getETHFullnodeHost(isMainnet));
+      const incognitoInstance = new web3.eth.Contract(getIncContractABI(), getIncognitoContractAddr(isMainnet));
+      const uniswapInstance = new web3.eth.Contract(UNISWAP_TRADE_ABI, getUniswapTradeContractAddress(isMainnet));
       let metaMask = getState().app.metaMask;
       if (!metaMask.isMetaMaskEnabled) {
         dispatch(enableMetaMask());
@@ -192,7 +209,7 @@ export function trade(tradeForm) {
       let swapRawData = uniswapInstance.methods.trade(tradeForm.token1.extTokenId, amountHex, tradeForm.token2.extTokenId, amountExpectedHex).encodeABI();
       let getTimestamp = (new Date()).getTime().toString(16);
       let randomBytes = '0x' + (getTimestamp.length % 2 === 0 ? getTimestamp : '0' + getTimestamp);
-      let dataToSign = (getUniswapTradeContractAddress() + swapRawData + randomBytes + web3.utils.padLeft(amountHex, 64)).split("0x").join("");
+      let dataToSign = (getUniswapTradeContractAddress(isMainnet) + swapRawData + randomBytes + web3.utils.padLeft(amountHex, 64)).split("0x").join("");
       let hashData = web3.utils.keccak256("0x" + dataToSign)
       const signBytes = sigMess(hashData, generatedETHAcc.privateKey)
       dispatch(updateValidateForm({snackBar: {isSuccess: true, message:  "Created transaction successfully"}}));
@@ -202,4 +219,11 @@ export function trade(tradeForm) {
     }
     dispatch(countDownRequests());
   }
+}
+
+export function sigMess(mess, privateKey) {
+  let dataToSigBuff = Buffer.from(mess.replace('0x', ''), "hex");
+  let privateKeyBuff = Buffer.from(privateKey.replace('0x', ''), "hex");
+  let signature = eutil.ecsign(dataToSigBuff, privateKeyBuff);
+  return '0x' + signature.r.toString('hex') + signature.s.toString('hex') + '0' + (signature.v - 27).toString(16);
 }
