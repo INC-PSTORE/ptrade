@@ -1,5 +1,5 @@
 import {
-  WalletInstance, goServices, storageService, setConfig,
+  WalletInstance, storageService, setConfig,
   NativeTokenInstance, PrivacyTokenInstance,
   isPaymentAddress, isPrivateKey,
 } from 'incognito-js';
@@ -11,9 +11,6 @@ let wallet;
 
 // set up environment and init new wallet or load wallet from storage
 export async function setupIncWallet(loadedIncWalletData) {
-  // load wasm
-  // await goServices.implementGoMethodUseWasm();
-
   // config SDK
   setConfig({
     mainnet: !isTestnet(),
