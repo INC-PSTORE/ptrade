@@ -40,7 +40,7 @@ import Slider from '@material-ui/core/Slider';
 
 
 import {
-  makeSelectETHAccount, makeSelectMetaMask,
+  makeSelectETHAccount, makeSelectMetaMask, makeSelectWalletConnect,
 } from '../App/selectors';
 import {
   onChangeModal,
@@ -60,6 +60,7 @@ import {
   getExchangeRate, trade,
   getReservedPool,
 } from './middlewares'
+import {openWalletList} from "../App/actions";
 
 let getPoolSizeInterval = null;
 function valuetext(value) {
@@ -187,6 +188,7 @@ export class TradePage extends React.PureComponent {
       tradeForm,
       tokenList,
       metaMask,
+      walletConnect,
     } = this.props;
 
     let snackBarDisplay = classes.snackBarContent;
@@ -243,10 +245,22 @@ export class TradePage extends React.PureComponent {
         />
         }
 
+        <div className={classes.incognitoTreasure}>
+          <div className={classes.incognitoTreasureText}>
+            <h3>The treasure hunting has begun.</h3>
+            <Button target={"blank"} href={"https://incognito.org/quest"} variant="contained"
+                    style={{backgroundColor: 'black', color: 'white'}} >
+              Check it out
+            </Button>
+          </div>
+          <img className={classes.incognitoTreasureImg}
+               src={"https://incognito-discourse.s3-us-west-2.amazonaws.com/original/2X/0/01aec2756c85762ecc22cbb62d67f83076d4547b.gif"}/>
+        </div>
+
         {/* Display Trade table */}
         <Paper className={classes.paper}>
           <Typography>
-            PSWAP
+            PTRADE
           </Typography>
           <FormControl variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">Input Amount</InputLabel>
@@ -307,7 +321,7 @@ export class TradePage extends React.PureComponent {
           </div>
 
           <Button onClick={this.tradeHandler} className={classes.tradeButton} variant="contained" color="secondary">
-            {metaMask.isMetaMaskEnabled ? 'TRADE' : 'Connect to wallet'}
+            {(metaMask.isMetaMaskEnabled || (walletConnect.connector && walletConnect.connector.connected)) ? 'TRADE' : 'Connect to wallet'}
           </Button>
         </Paper>
 
@@ -377,12 +391,13 @@ export function mapDispatchToProps(dispatch) {
   return {
     updateTradeForm: (tradeForm) => dispatch(onChangeTradeForm(tradeForm)),
     updateModal: (modal, value) => dispatch(onChangeModal(modal, value)),
-    updateSeletedDex: (dex) => dispatch(onChangeSelectedDex(dex)),
+    updateSelectedDex: (dex) => dispatch(onChangeSelectedDex(dex)),
     updateTokens: () => dispatch(loadTokens()),
     updateExchangeRate: (tradeForm) => dispatch(getExchangeRate(tradeForm)),
     updatePoolSize: (tradeForm) => dispatch(getReservedPool(tradeForm)),
     submitTrade: (tradeForm) => dispatch(trade(tradeForm)),
     onUpdateValidateForm: (validateForm) => dispatch(updateValidateForm(validateForm)),
+    onOpenWalletList: (isOpen) => dispatch(openWalletList(isOpen)),
   }
 }
 
@@ -394,6 +409,7 @@ const mapStateToProps = createStructuredSelector({
   formValidate: makeSelectValidateForm(),
   filter: makeSelectFilter(),
   metaMask: makeSelectMetaMask(),
+  walletConnect: makeSelectWalletConnect(),
 });
 
 const withConnect = connect(

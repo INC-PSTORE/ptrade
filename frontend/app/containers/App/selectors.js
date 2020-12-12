@@ -26,6 +26,9 @@ const makeSelectGeneratedETHAccFromIncAcc = () => createSelector(selectApp, appS
 const makeSelectMetaMask = () => createSelector(selectApp, appState => appState.metaMask);
 const makeSelectRefreshingBalances = () => createSelector(selectApp, appState => appState.isRefreshingBalances);
 
+const makeSelectWalletConnect = () => createSelector(selectApp, appState => appState.walletConnect);
+const makeSelectOpenWalletList = () => createSelector(selectApp, appState => appState.isOpenWalletList);
+
 export {
   makeSelectLocation,
   makeSelectETHAccount,
@@ -45,4 +48,6 @@ export {
   makeSelectGeneratedETHAccFromIncAcc,
   makeSelectMetaMask,
   makeSelectRefreshingBalances,
+  makeSelectWalletConnect,
+  makeSelectOpenWalletList,
 };

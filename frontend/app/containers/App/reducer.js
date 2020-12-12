@@ -20,6 +20,7 @@ import {
   COUNT_DOWN_REQUESTS,
   ENABLE_META_MASK_ACCOUNTS,
   REFRESH_BALANCES,
+  ENABLE_WALLET_CONNECT_ACCOUNTS, OPEN_WALLET_LIST,
 } from './constants';
 
 import {
@@ -28,8 +29,8 @@ import {
 } from "./constants";
 
 import { getIncKeyAccountByName } from '../../services/incognito/wallet';
-import { getKeysFromAccount } from '../../services/eth/wallet';
 import { genETHAccFromIncPrivKey } from '../../common/utils';
+import {MAINNET_CHAIN_ID} from "../../common/constants";
 
 // The initial state of the ShieldingPage
 export const initialState = {
@@ -61,11 +62,18 @@ export const initialState = {
   deployedTokens: [],
   metaMask: {
     isMetaMaskEnabled: false,
-    metaMaskRequiredMess: null,
+    requiredMess: null,
     metaMaskAccounts: null,
-    chainId: "0x1",
+    chainId: MAINNET_CHAIN_ID,
+  },
+  walletConnect: {
+    connector: null,
+    requiredMess: null,
+    connectorAccounts: null,
+    chainId: MAINNET_CHAIN_ID,
   },
   isRefreshingBalances: false,
+  isOpenWalletList: false,
 };
 
 function addETHAccount(state, action) {
@@ -222,7 +230,7 @@ function appReducer(state = initialState, action) {
         metaMask: {
           ...state.metaMask,
           isMetaMaskEnabled: action.metaMask.isMetaMaskEnabled,
-          metaMaskRequiredMess: action.metaMask.metaMaskRequiredMess,
+          requiredMess: action.metaMask.requiredMess,
           metaMaskAccounts: action.metaMask.metaMaskAccounts,
           chainId: action.metaMask.chainId,
         }
@@ -231,6 +239,22 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         isRefreshingBalances: action.isRefreshingBalances,
+      }
+    case ENABLE_WALLET_CONNECT_ACCOUNTS:
+      return {
+        ...state,
+        walletConnect: {
+          ...state.walletConnect,
+          connector: action.walletConnect.connector,
+          requiredMess:  action.walletConnect.requiredMess,
+          connectorAccounts:  action.walletConnect.connectorAccounts,
+          chainId:  action.walletConnect.chainId,
+        }
+      };
+    case OPEN_WALLET_LIST:
+      return {
+        ...state,
+        isOpenWalletList: action.isOpen,
       }
 
     default:

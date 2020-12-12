@@ -42,6 +42,9 @@ const styles =  theme => ({
     paper: {
       width: "60% !important",
     },
+    incognitoTreasure: {
+      width: "60% !important",
+    }
   },
   '@media (max-width: 850px)': {
     root: {
@@ -50,6 +53,12 @@ const styles =  theme => ({
     },
     paper: {
       width: "95%",
+    },
+    incognitoTreasure: {
+      width: "75% !important",
+    },
+    incognitoTreasureImg: {
+      height:"180px !important",
     },
     tokenLabel: {
       width: "350px !important",
@@ -74,6 +83,16 @@ const styles =  theme => ({
     },
     dialogTitle: {
       width: "250px !important",
+    },
+    incognitoTreasure: {
+      width: "100% !important",
+    },
+    incognitoTreasureText: {
+      width: '35%',
+    },
+    incognitoTreasureImg: {
+      width: '65%',
+      height:"130px !important",
     }
   },
   icon: {
@@ -106,6 +125,22 @@ const styles =  theme => ({
   },
   tradeButton: {
     width: '200px',
+  },
+  incognitoTreasure: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '40%',
+    height: '170px',
+    alignItems: 'center',
+    marginBottom: '5px',
+  },
+  incognitoTreasureText: {
+    marginLeft: '20px',
+    width: '55%',
+  },
+  incognitoTreasureImg: {
+    width: '45%',
+    height:"220px"
   }
 });
 

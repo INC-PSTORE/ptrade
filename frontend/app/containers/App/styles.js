@@ -78,6 +78,11 @@ const styles = {
     backgroundColor: "#f44336",
     color: 'white',
   },
+  '@media (max-width: 700px)': {
+    metaMaskSelect: {
+      display: 'none',
+    }
+  },
 };
 
 export default styles;

@@ -71,8 +71,7 @@ module.exports = require('./webpack.base.babel')({
   },
 
   plugins: [
-    new CopyWebpackPlugin([{ from: 'app/wasm', to: resolve(process.cwd(), 'build') }]),
-    // Minify and optimize the index.html
+  // Minify and optimize the index.html
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       minify: {

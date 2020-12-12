@@ -14,7 +14,12 @@ import {
   loadDeployedTokensFailure,
   updateMetaMask,
   updateRefreshingBalances,
+  openWalletList,
+  updateWalletConnect,
 } from './actions';
+
+import WalletConnect from "@walletconnect/client";
+import QRCodeModal from "@walletconnect/qrcode-modal";
 
 import {ETH_PRIVATE_KEY_FIELD_NAME, INC_WALLET_FIELD_NAME, PRIVATE_INC_ACC_NAME} from './constants';
 import {countUpRequests, countDownRequests} from './actions';
@@ -44,7 +49,6 @@ export function loadAccountsThunk(loadedWalletData) {
   return async (dispatch, getState) => {
     dispatch(countUpRequests());
     try {
-      const isMainnet = getState().app.metaMask.chainId === MAINNET_CHAIN_ID;
       // load Inc Wallet from local storage
       let incWallet;
       const incWalletData = loadedWalletData[INC_WALLET_FIELD_NAME];
@@ -56,6 +60,23 @@ export function loadAccountsThunk(loadedWalletData) {
       const privateIncAccount = incWallet ? getIncKeyAccountByName(PRIVATE_INC_ACC_NAME, incWallet) : null;
       if (privateIncAccount) {
         const ethWallet = genETHAccFromIncPrivKey(privateIncAccount.privateKey);
+
+        const connector = new WalletConnect({
+          bridge: "https://bridge.walletconnect.org", // Required
+          qrcodeModal: QRCodeModal,
+        });
+
+        let isMainnet = true;
+        if (window.ethereum && window.ethereum.isConnected() && window.ethereum.isMetaMask) {
+          const accounts = await window.ethereum.request({method: 'eth_accounts'});
+          if (accounts.length > 0) {
+            dispatch(enableMetaMask(ethWallet.getAddressString()));
+            isMainnet = window.ethereum.chainId === MAINNET_CHAIN_ID;
+          }
+        } else if (connector.connected && connector.accounts.length > 0) {
+          dispatch(enableWalletConnect(ethWallet.getAddressString()));
+          isMainnet = "0x" + connector.chainId.toString(16) === MAINNET_CHAIN_ID;
+        }
 
         const incContractAddr = getIncognitoContractAddr(isMainnet);
         const web3 = new Web3(getETHFullnodeHost(isMainnet));
@@ -110,70 +131,52 @@ export function loadDeployedTokensThunk(generatedETHAddress) {
   };
 }
 
-export function enableMetaMask() {
+export function enableMetaMask(ethAddress) {
   return async (dispatch, getState) => {
+    dispatch(countUpRequests());
     let metaMask = getState().app.metaMask;
+    let chainId;
+    let metaMaskReload = false;
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
       try {
-        const accounts = await window.ethereum.enable();
+        const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
         if (!accounts || accounts.length === 0) {
-          return false;
+          throw new Error("Can not request accounts");
         }
         metaMask.isMetaMaskEnabled = true;
         metaMask.metaMaskAccounts = accounts;
-        metaMask.chainId = window.ethereum.chainId;
-        if (metaMask.chainId !== KOVAN_CHAIN_ID && metaMask.chainId !== MAINNET_CHAIN_ID) {
-          metaMask.metaMaskRequiredMess = "Only Kovan testnet and Mainnet supported on ptrade!";
-        }
+        chainId = window.ethereum.chainId;
+        metaMaskReload = metaMask.chainId !== chainId;
+        metaMask.chainId = chainId;
+        metaMask.requiredMess = chainId !== KOVAN_CHAIN_ID && chainId !== MAINNET_CHAIN_ID ? "Only Kovan testnet and Mainnet supported on ptrade!" : "";
       } catch (error) {
-        metaMask.metaMaskRequiredMess = "App error can not connect to metamask. Please try again";
-        if (error.code === -32002) {
-          metaMask.metaMaskRequiredMess = "Please check meta mask extension to give us permission";
-        }
         metaMask.isMetaMaskEnabled = false;
         metaMask.metaMaskAccounts = null;
+        metaMask.requiredMess = error.toString();
       }
     } else {
-      metaMask.metaMaskRequiredMess = "Need meta mask installed and enabled to use awesome features";
       metaMask.isMetaMaskEnabled = false;
       metaMask.metaMaskAccounts = null;
     }
+    dispatch(updateMetaMask(metaMask));
+    if (!metaMask.requiredMess && metaMaskReload) {
+      let generatedETHAccFromIncAcc = getState().app.generatedETHAccFromIncAcc;
+      resetTokenInfor(dispatch, generatedETHAccFromIncAcc.address ? generatedETHAccFromIncAcc.address : ethAddress);
+    }
+
     if (metaMask.isMetaMaskEnabled) {
       window.ethereum.on('chainChanged', (chainId) => {
         let metaMask = getState().app.metaMask;
-        let isSupportedChain = true;
+        const metaMaskReload = metaMask.chainId !== chainId;
         metaMask.chainId = chainId;
-        if (chainId !== KOVAN_CHAIN_ID && chainId !== MAINNET_CHAIN_ID) {
-          metaMask.metaMaskRequiredMess = "Only Kovan testnet and Mainnet supported on ptrade!";
-          isSupportedChain = false;
-        }
-        if (metaMask.isMetaMaskEnabled) {
-          let generatedETHAccFromIncAcc = getState().app.generatedETHAccFromIncAcc;
-          dispatch(updateMetaMask(metaMask));
-          if (isSupportedChain) {
-            dispatch(loadDeployedTokensThunk(generatedETHAccFromIncAcc.address));
-            dispatch(onChangeTradeForm(
-              {
-                selectToken1: false,
-                selectToken2: false,
-                token1: null,
-                token2: null,
-                reserve1: 0,
-                reserve2: 0,
-                inputAmount: 0,
-                outputAmount: 0,
-                slippage: 1,
-              }));
-            dispatch(loadTokens());
-          }
-        }
-      });
-      window.ethereum.on('disconnect', (error) => {
-        console.log("Metamask Disconnected ", error);
-        let metaMask = getState().app.metaMask;
-        metaMask.isMetaMaskEnabled = false;
+        metaMask.requiredMess = chainId !== KOVAN_CHAIN_ID && chainId !== MAINNET_CHAIN_ID ? "Only Kovan testnet and Mainnet supported on ptrade!" : "";
+
         dispatch(updateMetaMask(metaMask));
+        if (!metaMask.requiredMess && metaMaskReload) {
+          let generatedETHAccFromIncAcc = getState().app.generatedETHAccFromIncAcc;
+          resetTokenInfor(dispatch, generatedETHAccFromIncAcc.address);
+        }
       });
       window.ethereum.on('accountsChanged', (accounts) => {
         if (accounts.length === 0) {
@@ -182,7 +185,115 @@ export function enableMetaMask() {
           dispatch(updateMetaMask(metaMask));
         }
       });
+      dispatch(openWalletList(false));
     }
-    dispatch(updateMetaMask(metaMask));
+    dispatch(countDownRequests());
   }
+}
+
+export function enableWalletConnect(ethAddress) {
+  // Create a connector
+  return async (dispatch, getState) => {
+    const metaMask = getState().app.metaMask;
+    if (metaMask.isMetaMaskEnabled) {
+      return
+    }
+    let walletConnect = getState().app.walletConnect;
+    const connector = new WalletConnect({
+      bridge: "https://bridge.walletconnect.org", // Required
+      qrcodeModal: QRCodeModal,
+    });
+    walletConnect.connector = connector;
+
+    // Check if connection is already established
+    if (!connector.connected) {
+      // create new session
+      await connector.createSession();
+    }
+    const chainId = "0x" + connector.chainId.toString(16);
+    const walletConnectReload = walletConnect.chainId !== chainId;
+    walletConnect.requiredMess = chainId !== KOVAN_CHAIN_ID && chainId !== MAINNET_CHAIN_ID ? "Only Kovan testnet and Mainnet supported on ptrade!" : "";
+    walletConnect.connectorAccounts = connector.accounts;
+    walletConnect.chainId = chainId;
+    dispatch(openWalletList(false));
+    dispatch(updateWalletConnect(walletConnect));
+    if (!walletConnect.requiredMess && walletConnectReload) {
+      const generatedETHAccFromIncAcc = getState().app.generatedETHAccFromIncAcc;
+      resetTokenInfor(dispatch, generatedETHAccFromIncAcc.address ? generatedETHAccFromIncAcc.address : ethAddress);
+    }
+
+    // Subscribe to connection events
+    connector.on("connect", (error, payload) => {
+      if (error) {
+        throw error;
+      }
+      let walletConnect = getState().app.walletConnect;
+      // Get provided accounts and chainId
+      const {accounts, chainId} = payload.params[0];
+      const chainIdHex = "0x" + chainId.toString(16);
+      const walletConnectReload = walletConnect.chainId !== ("0x" + chainId.toString(16));
+      walletConnect.requiredMess = chainIdHex !== KOVAN_CHAIN_ID && chainIdHex !== MAINNET_CHAIN_ID ? "Only Kovan testnet and Mainnet supported on ptrade!" : "";
+      walletConnect.connectorAccounts = accounts;
+      walletConnect.chainId = "0x" + chainId.toString(16);
+      dispatch(updateWalletConnect(walletConnect));
+      if (!walletConnect.requiredMess && walletConnectReload) {
+        const generatedETHAccFromIncAcc = getState().app.generatedETHAccFromIncAcc;
+        resetTokenInfor(dispatch, generatedETHAccFromIncAcc.address);
+      }
+    });
+
+    connector.on("session_update", (error, payload) => {
+      if (error) {
+        throw error;
+      }
+      let walletConnect = getState().app.walletConnect;
+      // Get updated accounts and chainId
+      const {accounts, chainId} = payload.params[0];
+      const chainIdHex = "0x" + chainId.toString(16);
+      const walletConnectReload = walletConnect.chainId !== chainIdHex;
+      walletConnect.requiredMess = chainIdHex !== KOVAN_CHAIN_ID && chainIdHex !== MAINNET_CHAIN_ID ? "Only Kovan testnet and Mainnet supported on ptrade!" : "";
+      walletConnect.connectorAccounts = accounts;
+      walletConnect.chainId = "0x" + chainId.toString(16);
+
+      dispatch(updateWalletConnect(walletConnect));
+      if (!walletConnect.requiredMess && walletConnectReload) {
+        const generatedETHAccFromIncAcc = getState().app.generatedETHAccFromIncAcc;
+        resetTokenInfor(dispatch, generatedETHAccFromIncAcc.address);
+      }
+    });
+
+    connector.on("disconnect", (error, payload) => {
+      if (error) {
+        throw error;
+      }
+
+      // Delete connector
+      const walletConnect = {
+        connector: null,
+        requiredMess: null,
+        connectorAccounts: null,
+        chainId: MAINNET_CHAIN_ID,
+      };
+      dispatch(updateWalletConnect(walletConnect));
+    });
+  }
+}
+
+function resetTokenInfor(dispatch, ethAddress) {
+  dispatch(onChangeTradeForm(
+    {
+      selectToken1: false,
+      selectToken2: false,
+      token1: null,
+      token2: null,
+      reserve1: 0,
+      reserve2: 0,
+      inputAmount: 0,
+      outputAmount: 0,
+      slippage: 1,
+    }));
+  if (ethAddress !== "") {
+    dispatch(loadDeployedTokensThunk(ethAddress));
+  }
+  dispatch(loadTokens());
 }

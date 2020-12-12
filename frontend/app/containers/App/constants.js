@@ -10,8 +10,8 @@
  */
 
 
-// export const PSTORE_DOMAIN = 'https://pstore.app'; // TODO: update to correct domain
-export const PSTORE_DOMAIN = 'http://localhost:8000'; // TODO: update to correct domain
+export const PSTORE_DOMAIN = 'https://pstore.app'; // TODO: update to correct domain
+// export const PSTORE_DOMAIN = 'http://localhost:8000'; // TODO: update to correct domain
 export const ETH_PRIVATE_KEY_FIELD_NAME = 'ETH_PRIVATE_KEY';
 export const INC_WALLET_FIELD_NAME = 'INC_WALLET';
 
@@ -75,3 +75,9 @@ export const ENABLE_META_MASK_ACCOUNTS =
 
 export const REFRESH_BALANCES =
   'devbowl/App/REFRESH_BALANCES';
+
+export const OPEN_WALLET_LIST =
+  'devbowl/App/OPEN_WALLET_LIST';
+
+export const ENABLE_WALLET_CONNECT_ACCOUNTS =
+  'devbowl/App/ENABLE_WALLET_CONNECT_ACCOUNTS';

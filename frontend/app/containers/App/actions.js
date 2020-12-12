@@ -18,6 +18,8 @@ import {
   COUNT_DOWN_REQUESTS,
   ENABLE_META_MASK_ACCOUNTS,
   REFRESH_BALANCES,
+  OPEN_WALLET_LIST,
+  ENABLE_WALLET_CONNECT_ACCOUNTS,
 } from './constants';
 
 import { getIncKeyAccountByName } from '../../services/incognito/wallet';
@@ -162,5 +164,19 @@ export function updateRefreshingBalances(isRefreshingBalances) {
   return {
     type: REFRESH_BALANCES,
     isRefreshingBalances,
+  }
+}
+
+export function openWalletList(isOpen) {
+  return {
+    type: OPEN_WALLET_LIST,
+    isOpen,
+  }
+}
+
+export function updateWalletConnect(walletConnect) {
+  return {
+    type: ENABLE_WALLET_CONNECT_ACCOUNTS,
+    walletConnect,
   }
 }
